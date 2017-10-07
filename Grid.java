@@ -86,7 +86,7 @@ public class Grid {
 	 */
 	public void checkRows() {
 		boolean rowIsFull = false;
-		boolean rowIsEmpty = true;
+		//boolean rowIsEmpty = true;    // will probably remove
 		int cascadeRow = 0;
 		for ( int row = HEIGHT - 1; row > 0; row--) {
 				for ( int col = 0; col < WIDTH; col++ ) {
@@ -95,7 +95,7 @@ public class Grid {
 						break;
 					} else {
 						rowIsFull = true;
-						rowIsEmpty = false;
+						//rowIsEmpty = false;  // will probably remove
 						cascadeRow = row;
 					}
 				}

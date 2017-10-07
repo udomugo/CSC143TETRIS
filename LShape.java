@@ -91,6 +91,11 @@ public class LShape {
 		return points;
 	}
 	
+	/**
+	 * Sets the row of all Squares within the LShape
+	 * 
+	 * @param row
+	 */
 	public void setRow(int row) {
 		for (int i = 0; i < PIECE_COUNT; i++) {
 			int currentRow = row + square[i].getRow(); 

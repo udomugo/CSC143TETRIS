@@ -66,7 +66,11 @@ public class Square {
 	public int getCol() {
 		return col;
 	}
-
+	/**
+	 * Sets the row for this Square
+	 * 
+	 * @param row
+	 */
 	public void setRow(int row) {
 		this.row = row;
 	}
@@ -136,15 +140,16 @@ public class Square {
 			}
 		}
 	}
-	
-	public void forceMove() {
-		
-		this.ableToMove = true;
-	}
-	
-	public void forceUnmovable() {
-		this.ableToMove = false;
-	}
+
+//	Will probably remove these methods
+//	public void forceMove() {
+//		
+//		this.ableToMove = true;
+//	}
+//	
+//	public void forceUnmovable() {
+//		this.ableToMove = false;
+//	}
 
 	/**
 	 * Changes the color of this square

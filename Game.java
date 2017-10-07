@@ -62,6 +62,11 @@ public class Game {
 		grid.checkRows();
 	}
 	
+	/**
+	 * Drops the current piece to the lowest possible position
+	 * 
+	 * 
+	 */
 	public void dropPiece() {
 		if (piece != null) {		
 		
@@ -95,6 +100,11 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Gets the total shape width
+	 * 
+	 * @return
+	 */
 	public int getXperimeter() {
 		Point[] p = piece.getLocations();
 		Set<Integer> xValue = new HashSet<Integer>();
@@ -104,6 +114,11 @@ public class Game {
 		return xValue.size();
 	}
 	
+	/**
+	 * Gets the total shape Height
+	 * 
+	 * @return
+	 */
 	public int getYperimeter() {
 		Point[] p = piece.getLocations();
 		Set<Integer> yValue = new HashSet<Integer>();
