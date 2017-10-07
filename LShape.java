@@ -22,7 +22,7 @@ public class LShape {
 	private Square[] square; // the squares that make up this piece
 
 	// Made up of PIECE_COUNT squares
-	private Grid grid; // the board this piece is on
+	//private Grid grid; // the board this piece is on // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
 
 	// number of squares in one Tetris game piece
 	private static final int PIECE_COUNT = 4;
@@ -40,7 +40,7 @@ public class LShape {
 	 * 
 	 */
 	public LShape(int r, int c, Grid g) {
-		grid = g;
+		//grid = g; // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
 		square = new Square[PIECE_COUNT];
 		ableToMove = true;
 
