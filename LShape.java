@@ -18,6 +18,7 @@ import java.awt.Point;
  */
 public class LShape extends Shape {
 	private boolean ableToMove; // can this piece move
+	
 
 	private Square[] square; // the squares that make up this piece
 

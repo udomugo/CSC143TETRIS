@@ -132,7 +132,7 @@ public class TetrisUnitTest {
 		// Creating LShape object
 		Shape shapeL = new LShape(4, 4, toMoveOn);
 		//Shape piece = new LShape();
-		
+		shapeL.rotate(shapeL);
 		assertTrue(shapeL.rotate(shapeL));
 	}
 }

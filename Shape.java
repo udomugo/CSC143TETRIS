@@ -5,10 +5,10 @@ public abstract class Shape {
 	Square[] square;
 	
 	public boolean rotate(Shape piece) {
-		//if () {
-			
-		//}
-		piece.getClass().equals(LShape);
+		System.out.println(piece.getClass().toString());
+		String evalClass = piece.getClass().toString();
+		System.out.println(evalClass);
+		return evalClass.equals("class LShape");
 	}
 	
 	
