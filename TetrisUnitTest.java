@@ -35,9 +35,4 @@ public class TetrisUnitTest {
 			}
 		}
 	}
-	
-	@Test
-	public void betterTestCheckRows() {
-		Grid myGrid = new Grid();
-	}
 }
