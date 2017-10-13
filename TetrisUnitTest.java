@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.awt.Color;
+import java.awt.Point;
 
 import org.junit.Test;
 
@@ -124,15 +125,61 @@ public class TetrisUnitTest {
 		assertTrue( 5 == (int)shapeL.getLocations()[1].getY());
 	}
 	
+//	@Test
+//	public void testShapeGetClass() {
+//		// Creates a grid to test shape object movement
+//		Grid toMoveOn = new Grid();
+//		
+//		// Creating LShape object
+//		LShape shapeL = new LShape(4, 4, toMoveOn);
+//		//Shape piece = new LShape();
+//		shapeL.rotate(shapeL.getLocations());
+//		assertTrue(shapeL.rotate(shapeL.getLocations()));
+//	}
+	
 	@Test
-	public void testShapeGetClass() {
+	public void testLShapeRotate() {
+		int row = 0;
+		int col = 0;
 		// Creates a grid to test shape object movement
 		Grid toMoveOn = new Grid();
 		
 		// Creating LShape object
-		Shape shapeL = new LShape(4, 4, toMoveOn);
-		//Shape piece = new LShape();
-		shapeL.rotate(shapeL);
-		assertTrue(shapeL.rotate(shapeL));
+		LShape shapeL = new LShape(4, 4, toMoveOn);
+		
+		Point[] p = shapeL.getLocations();
+		
+		// Testing original position
+		for (Point coord : p) {
+			int i = 0;
+			//Color color = shapeL.getColor();
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue((row == 3 || row == 4 || row == 5) && (col == 4 || col == 5));
+//			if ( (row == 3 || row == 4 || row == 5) && (col == 4 || col == 5) ) {
+//				shapeL.square[i].
+//				assertTrue();
+//			} else {
+//				assertFalse(false);
+//			}
+		}
+		
+		
+
+		
+		shapeL.rotate(shapeL.getLocations());
+		
+		// Testing rotated position
+		for (Point coord : p) {
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue((row == 4 || row == 5) && (col == 3 || col == 4 || col == 5));
+//			if ( (row == 4 || row == 5) && (col == 3 || col == 4 || col == 5) ) {
+//				assertTrue(true);
+//			} else {
+//				assertFalse(false);
+//			}
+		}
+		
 	}
 }

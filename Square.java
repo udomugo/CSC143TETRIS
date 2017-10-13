@@ -66,6 +66,7 @@ public class Square {
 	public int getCol() {
 		return col;
 	}
+	
 	/**
 	 * Sets the row for this Square
 	 * 
