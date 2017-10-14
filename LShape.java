@@ -112,12 +112,12 @@ public class LShape extends Shape {
 	 * 
 	 * @param row
 	 */
-	public void setRow(int row) {
-		for (int i = 0; i < PIECE_COUNT; i++) {
-			int currentRow = row + square[i].getRow(); 
-			square[i].setRow(currentRow);
-		}
-	}
+//	public void setRow(int row) {
+//		for (int i = 0; i < PIECE_COUNT; i++) {
+//			int currentRow = row + square[i].getRow(); 
+//			square[i].setRow(currentRow);
+//		}
+//	}
 
 	/**
 	 * Return the color of this piece

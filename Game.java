@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.TreeSet;
 
@@ -65,9 +66,31 @@ public class Game {
 	
 	public void rotatePiece() {
 		if (piece != null) {
-			piece.rotate();
+ 			piece.rotate();
 		}
+		updatePiece();
+		display.update();
+		grid.checkRows();
 	}
+	
+	
+//	public boolean findTargetRow() {
+//		
+//		Point[] p = piece.getLocations();
+//		//int startRow = (int) p[0].getY();
+//		int startRow = getShapeGreatestY();
+//		int col = getShapeLowestX();
+//		int targetRow = 0;
+//		int wide = getXperimeter();
+//		//int tall = getYperimeter();
+//		int rowAbove = 0; 
+//		ArrayList<Integer> memYvalue = new ArrayList<Integer>();
+//		TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
+//		
+//		
+//		
+//		return false;
+//	}
 	
 	/**
 	 * Drops the current piece to the lowest possible position
@@ -77,33 +100,93 @@ public class Game {
 	public void dropPiece() {
 		if (piece != null) {		
 		
-		Point[] p = piece.getLocations();
-		int startRow = (int) p[0].getY();
-		int col = (int) p[0].getX();
-		int targetRow = 0;
-		int wide = getXperimeter();
-		int tall = getYperimeter();
-		TreeSet<Integer> bottomValues = new TreeSet<Integer>();
-		
-		
-		for ( int i = col; i < wide + col; i++) {
-			for ( int row = startRow + tall; row < Grid.HEIGHT; row++ ) {
-				if(grid.isSet(row, i)) {
-					bottomValues.add(row - 1);
-					break;
-				} else if(row == Grid.HEIGHT - 1) {
-					bottomValues.add(row);
-					break;
+			Point[] p = piece.getLocations();
+			//int startRow = (int) p[0].getY();
+			int startRow = getShapeGreatestY();
+			int col = getShapeLowestX();
+			int targetRow = 0;
+			int wide = getXperimeter();
+			//int tall = getYperimeter();
+			int rowAbove = 0; 
+			ArrayList<Integer> memYvalue = new ArrayList<Integer>();
+			TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
+			
+			
+			for ( Point coord : p) {
+				
+				lowestYvalues.clear();
+				
+	//			int rowCounter = 0;
+				
+				//for ( int i = col; i < wide + col; i++) {
+					for ( int row = (int)coord.getY(); row < Grid.HEIGHT; row++ ) {
+						if(grid.isSet(row, (int) coord.getX())) {
+							rowAbove = row - 1;
+							lowestYvalues.add( rowAbove - (int)coord.getY());
+					} else if(row == Grid.HEIGHT - 1) {
+						rowAbove = Grid.HEIGHT - 1;
+						lowestYvalues.add( rowAbove - (int)coord.getY());
+					}
 				}
+				// the count of spaces from the square to a set square
+	//			for ( int row = (int)coord.getY(); i < 19; i++) {
+	//				if (!grid.isSet(col, (int)coord.getY())) {
+	//					rowCounter++;
+	//					
+	//				}
+	//			}
+				
+				
+			//}
+				
+			
+			
+	//		for ( int i = col; i < wide + col; i++) {
+	//			for ( int row = startRow/* + tall*/; row < Grid.HEIGHT; row++ ) {
+	//				if(grid.isSet(row, i)) {
+	//					rowAbove = row - 1;
+	////					int clearanceCount = 0;
+	////					for ( int mem = 0; mem < memYvalue.length; mem++) {
+	////						if ( rowAbove == memYvalue[mem]) {
+	////							clearanceCount++;
+	////							if (clearanceCount == mem)
+	////						}
+	////					}
+	//					memYvalue.add(rowAbove);
+	//					lowestYvalues.add(rowAbove);
+	//					break;
+	//				} else if(row == Grid.HEIGHT - 1) {
+	//					lowestYvalues.add(row);
+	//					break;
+	//				}
+	//			}
+	//		}
+	//		//int lowestValue0;
+	//		if (lowestYvalues.size() == 1 && memYvalue.size() == wide) {
+	//			int lowestValue = memYvalue.get(0);
+	//			targetRow = lowestValue;
+	//		} else {
+	//			int lowestValue = lowestYvalues.pollFirst();
+	//			targetRow = lowestValue - startRow/* - 2*/;
+	//		}
+			
+			
+	 		//piece.setRow(targetRow);
+			
+	//		for (Point coord : p) {
+	//			coord.setLocation(coord.getX(), coord.getY() + targetRow);
+	//		}
+	 		
+			
 			}
-		}
-		int lowestValue =  bottomValues.pollFirst();
-		targetRow = lowestValue - startRow - 2;
-		
- 		piece.setRow(targetRow);
-		updatePiece();
-		display.update();
-		grid.checkRows();
+			
+			coord.setLocation((int)coord.getX(), (int)coord.getY() + lowestYvalues.pollFirst());
+			
+			piece.setLocations(p);
+			
+	 		updatePiece();
+			display.update();
+			grid.checkRows();
 		}
 	}
 	
@@ -134,6 +217,25 @@ public class Game {
 		}
 		return yValue.size();
 	}
+	
+	public int getShapeGreatestY() {
+		Point[] p = piece.getLocations();
+		TreeSet<Integer> yValue = new TreeSet<Integer>();
+		for ( int i = 0; i < p.length; i++) {
+			yValue.add((int)p[i].getY());
+		}
+		return yValue.pollLast();
+	}
+	
+	public int getShapeLowestX() {
+		Point[] p = piece.getLocations();
+		TreeSet<Integer> xValue = new TreeSet<Integer>();
+		for ( int i = 0; i < p.length; i++) {
+			xValue.add((int)p[i].getX());
+		}
+		return xValue.pollFirst();
+	}
+
 
 	/**
 	 * Returns true if the game is over
