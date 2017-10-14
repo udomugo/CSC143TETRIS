@@ -92,6 +92,21 @@ public class LShape extends Shape {
 		return points;
 	}
 	
+	public void setLocations(Point[] points) {
+		//points = new Point[PIECE_COUNT];
+		for (int i = 0; i < PIECE_COUNT; i++) {
+			square[i].setCol((int)points[i].getX());
+			square[i].setRow((int)points[i].getY());
+			//points[i] = new Point(square[i].getCol(), square[i].getRow());
+		}
+		//return points;
+	}
+	
+	public void rotate() {
+		this.setLocations(super.calcRotate(this.getLocations()));
+	}
+	
+	
 	/**
 	 * Sets the row of all Squares within the LShape
 	 * 

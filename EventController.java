@@ -69,6 +69,11 @@ public class EventController extends KeyAdapter implements ActionListener {
 			case KeyEvent.VK_DOWN:
 				handleMove(Direction.DOWN);
 				break;
+			case KeyEvent.VK_UP:
+				timer.stop();
+				handleRotate();
+				timer.start();
+				break;
 			}
 		}
 	}
@@ -83,6 +88,13 @@ public class EventController extends KeyAdapter implements ActionListener {
 	 */
 	private void handleMove(Direction direction) {
 		game.movePiece(direction);
+		gameOver = game.isGameOver();
+		if (gameOver)
+			timer.stop();
+	}
+	
+	private void handleRotate() {
+		game.rotatePiece();
 		gameOver = game.isGameOver();
 		if (gameOver)
 			timer.stop();

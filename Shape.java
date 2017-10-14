@@ -12,39 +12,89 @@ public abstract class Shape {
 	
 	private static Point[] points;
 	
-	public void rotate(Point[] p) {
+	public Point[] calcRotate(Point[] p) {
 		
 		points = p;
-		x = (int) points[2].getX();
-		y = (int) points[2].getY();
-		lengthX = getXperimeter(points);
-		lengthY = getYperimeter(points);
-		int[] xCoord1 = new int[4];
-		int[] xCoord2 = new int[4];
-		int[] yCoord1 = new int[4];
-		int[] yCoord2 = new int[4];
+		x = (int) points[1].getX();
+		y = (int) points[1].getY();
+//		lengthX = getXperimeter(points);
+//		lengthY = getYperimeter(points);
+//		int[] xCoord1 = new int[4];
+//		int[] xCoord2 = new int[4];
+//		int[] yCoord1 = new int[4];
+//		int[] yCoord2 = new int[4];
 		
-		if (lengthX > lengthY) {
-			for ( Point coord : points) {
-				int i = 0;
-				if (x == coord.getX() || x > coord.getX()) {
-					xCoord1[i] = (int) coord.getX();
-				} else if (x == coord.getX() || x < coord.getX()) {
-					xCoord2[i] = (int) coord.getX();
-				}
-				i++;
+		int row = 0;
+		int col = 0;
+		int i = 0;
+		
+		for ( Point coord : points) {
+			
+			
+			row = (int) coord.getY() - y;
+			col = (int) coord.getX() - x;
+			
+			if (col == 0 && row == -1) {
+				points[i].setLocation((int) coord.getX() + 1, (int) coord.getY() + 1);
+			} else if (col == 1 && row == -1) {
+				points[i].setLocation((int) coord.getX() + 0, (int) coord.getY() +  2);
+			} else if (col == 1 && row == 0) {
+				points[i].setLocation((int) coord.getX() - 1, (int) coord.getY() +  1);
+			} else if (col == 1 && row == 1) {
+				points[i].setLocation((int) coord.getX() - 2, (int) coord.getY() +  0);
+			} else if (col == 0 && row == 1) {
+				points[i].setLocation((int) coord.getX() - 1, (int) coord.getY() -  1);
+			} else if (col == -1 && row == 1) {
+				points[i].setLocation((int) coord.getX() + 0, (int) coord.getY() - 2);
+			} else if (col == -1 && row == 0) {
+				points[i].setLocation((int) coord.getX() + 1, (int) coord.getY() - 1);
+			} else if (col == -1 && row == -1) {
+				points[i].setLocation((int) coord.getX() + 2, (int) coord.getY() + 0);
 			}
-		} else if (lengthX < lengthY) {
-			for ( Point coord : points) {
-				int i = 0;
-				if (y == coord.getY() || y > coord.getY()) {
-					yCoord1[i] = (int) coord.getY();
-				} else if (y == coord.getY () || y < coord.getY()) {
-					yCoord2[i] = (int) coord.getY();
-				}
-				i++;
-			}
+			i++;
+			
+//			if (col == 0 && row == -1) {
+//				coord.setLocation((int) coord.getX() + 1, (int) coord.getY() + 1);
+//			} else if (col == 1 && row == -1) {
+//				coord.setLocation((int) coord.getX() - 1, (int) coord.getY() +  2);
+//			} else if (col == 1 && row == 0) {
+//				coord.setLocation((int) coord.getX() - 1, (int) coord.getY() +  1);
+//			} else if (col == 1 && row == 1) {
+//				coord.setLocation((int) coord.getX() - 2, (int) coord.getY() +  0);
+//			} else if (col == 0 && row == 1) {
+//				coord.setLocation((int) coord.getX() - 1, (int) coord.getY() -  1);
+//			} else if (col == -1 && row == 1) {
+//				coord.setLocation((int) coord.getX() + 0, (int) coord.getY() - 2);
+//			} else if (col == -1 && row == 0) {
+//				coord.setLocation((int) coord.getX() + 1, (int) coord.getY() - 1);
+//			} else if (col == -1 && row == -1) {
+//				coord.setLocation((int) coord.getX() + 1, (int) coord.getY() + 0);
+//			}
 		}
+		
+		return this.points;
+		
+//		if (lengthX > lengthY) {
+//			for ( Point coord : points) {
+//				int i = 0;
+//				if (x == coord.getX() || x > coord.getX()) {
+//					xCoord1[i] = (int) coord.getX();
+//				} else if (x == coord.getX() || x < coord.getX()) {
+//					xCoord2[i] = (int) coord.getX();
+//				}
+//				i++;
+//			}
+//		} else if (lengthX < lengthY) {
+//			for ( Point coord : points) {
+//				int i = 0;
+//				if (y == coord.getY() || y > coord.getY()) {
+//					yCoord1[i] = (int) coord.getY();
+//				} else if (y == coord.getY () || y < coord.getY()) {
+//					yCoord2[i] = (int) coord.getY();
+//				}
+//				i++;
+//			}
+//		}
 	}
 	
 //	private Square[] square;

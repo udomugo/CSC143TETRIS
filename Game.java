@@ -57,9 +57,16 @@ public class Game {
 		if (piece != null) {
 			piece.move(direction);
 		}
+		
 		updatePiece();
 		display.update();
 		grid.checkRows();
+	}
+	
+	public void rotatePiece() {
+		if (piece != null) {
+			piece.rotate();
+		}
 	}
 	
 	/**
