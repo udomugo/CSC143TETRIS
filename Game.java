@@ -108,79 +108,35 @@ public class Game {
 			int wide = getXperimeter();
 			//int tall = getYperimeter();
 			int rowAbove = 0; 
+			int travelDist = 0;
 			ArrayList<Integer> memYvalue = new ArrayList<Integer>();
 			TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
 			
 			
+			//lowestYvalues.clear();
 			for ( Point coord : p) {
 				
-				lowestYvalues.clear();
 				
-	//			int rowCounter = 0;
-				
-				//for ( int i = col; i < wide + col; i++) {
 					for ( int row = (int)coord.getY(); row < Grid.HEIGHT; row++ ) {
 						if(grid.isSet(row, (int) coord.getX())) {
 							rowAbove = row - 1;
 							lowestYvalues.add( rowAbove - (int)coord.getY());
-					} else if(row == Grid.HEIGHT - 1) {
-						rowAbove = Grid.HEIGHT - 1;
-						lowestYvalues.add( rowAbove - (int)coord.getY());
+							break;
+						} else if(row == Grid.HEIGHT - 1) {
+							rowAbove = Grid.HEIGHT - 1;
+							lowestYvalues.add( rowAbove - (int)coord.getY());
+							break;
+						}
 					}
-				}
-				// the count of spaces from the square to a set square
-	//			for ( int row = (int)coord.getY(); i < 19; i++) {
-	//				if (!grid.isSet(col, (int)coord.getY())) {
-	//					rowCounter++;
-	//					
-	//				}
-	//			}
-				
-				
-			//}
-				
-			
-			
-	//		for ( int i = col; i < wide + col; i++) {
-	//			for ( int row = startRow/* + tall*/; row < Grid.HEIGHT; row++ ) {
-	//				if(grid.isSet(row, i)) {
-	//					rowAbove = row - 1;
-	////					int clearanceCount = 0;
-	////					for ( int mem = 0; mem < memYvalue.length; mem++) {
-	////						if ( rowAbove == memYvalue[mem]) {
-	////							clearanceCount++;
-	////							if (clearanceCount == mem)
-	////						}
-	////					}
-	//					memYvalue.add(rowAbove);
-	//					lowestYvalues.add(rowAbove);
-	//					break;
-	//				} else if(row == Grid.HEIGHT - 1) {
-	//					lowestYvalues.add(row);
-	//					break;
-	//				}
-	//			}
-	//		}
-	//		//int lowestValue0;
-	//		if (lowestYvalues.size() == 1 && memYvalue.size() == wide) {
-	//			int lowestValue = memYvalue.get(0);
-	//			targetRow = lowestValue;
-	//		} else {
-	//			int lowestValue = lowestYvalues.pollFirst();
-	//			targetRow = lowestValue - startRow/* - 2*/;
-	//		}
-			
-			
-	 		//piece.setRow(targetRow);
-			
-	//		for (Point coord : p) {
-	//			coord.setLocation(coord.getX(), coord.getY() + targetRow);
-	//		}
-	 		
-			
+					
 			}
 			
-			coord.setLocation((int)coord.getX(), (int)coord.getY() + lowestYvalues.pollFirst());
+			travelDist = lowestYvalues.pollFirst();
+			
+			for ( Point coord : p) {
+				coord.setLocation((int)coord.getX(), 
+						travelDist + (int)coord.getY());
+			}
 			
 			piece.setLocations(p);
 			
