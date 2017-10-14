@@ -167,7 +167,10 @@ public class TetrisUnitTest {
 		
 
 		
-		shapeL.rotate(shapeL.getLocations());
+		//shapeL.rotate(shapeL.getLocations());
+		shapeL.rotate();
+		
+		p = shapeL.getLocations();
 		
 		// Testing rotated position
 		for (Point coord : p) {
