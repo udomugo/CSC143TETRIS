@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-public abstract class Shape {
+public abstract class AbstractPiece implements Piece{
 	
 	private static int x = 0;
 	private static int y = 0;
@@ -14,6 +14,138 @@ public abstract class Shape {
 	private static int lengthY = 0;
 	
 	private static Point[] points;
+	
+	protected boolean ableToMove;
+	
+	protected Square[] square;
+	
+	// number of squares in one Tetris game piece
+	private static final int PIECE_COUNT = 4;
+	
+	// Made up of PIECE_COUNT squares
+	protected Grid grid; // the board this piece is on // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
+	
+	/**
+	 * Creates an L-Shape piece. See class description for actual location of r
+	 * and c
+	 * 
+	 * @param r
+	 *            row location for this piece
+	 * @param c
+	 *            column location for this piece
+	 * @param g
+	 *            the grid for this game piece
+	 * 
+	 */
+	public AbstractPiece(Grid g) {
+		grid = g; // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
+		square = new Square[PIECE_COUNT];
+		ableToMove = true;
+
+//		// Create the squares
+//		square[0] = new Square(g, r - 1, c, Color.magenta, true);
+//		square[1] = new Square(g, r, c, Color.magenta, true);
+//		square[2] = new Square(g, r + 1, c, Color.magenta, true);
+//		square[3] = new Square(g, r + 1, c + 1, Color.magenta, true);
+	}
+	
+	/**
+	 * Draws the piece on the given Graphics context
+	 */
+	public void draw(Graphics g) {
+		//square = this.getSquares();
+		for (int i = 0; i < PIECE_COUNT; i++) {
+			square[i].draw(g);
+		}
+	}
+	
+//	public Square[] getSquare(Piece piece) {
+//		return piece.getSquares();
+//	}
+	
+	/**
+	 * Moves the piece if possible Freeze the piece if it cannot move down
+	 * anymore
+	 * 
+	 * @param direction
+	 *            the direction to move
+	 */
+	public void move(Direction direction) {
+		if (canMove(direction)) {
+			for (int i = 0; i < PIECE_COUNT; i++)
+				square[i].move(direction);
+		}
+		// if we couldn't move, see if because we're at the bottom
+		else if (direction == Direction.DOWN) {
+			ableToMove = false;
+		}
+	}
+	
+	/**
+	 * Returns the (row,col) grid coordinates occupied by this Piece
+	 * 
+	 * @return an Array of (row,col) Points
+	 */
+	public Point[] getLocations() {
+		Point[] points = new Point[PIECE_COUNT];
+		for (int i = 0; i < PIECE_COUNT; i++) {
+			points[i] = new Point(square[i].getCol(), square[i].getRow());
+		}
+		return points;
+	}
+	
+	/**
+	 * Accepts a Point[] array and sets columns and rows the Square objects in square[] array
+	 * @param points
+	 */
+	public void setLocations(Point[] points) {
+		//points = new Point[PIECE_COUNT];
+		for (int i = 0; i < PIECE_COUNT; i++) {
+			square[i].setCol((int)points[i].getX());
+			square[i].setRow((int)points[i].getY());
+			//points[i] = new Point(square[i].getCol(), square[i].getRow());
+		}
+		//return points;
+	}
+	
+	/**
+	 * Return the color of this piece
+	 */
+	public Color getColor() {
+		// all squares of this piece have the same color
+		return square[0].getColor();
+	}
+
+	/**
+	 * Returns if this piece can move in the given direction
+	 * 
+	 */
+	public boolean canMove(Direction direction) {
+		if (!ableToMove)
+			return false;
+
+		// Each square must be able to move in that direction
+		boolean answer = true;
+		for (int i = 0; i < PIECE_COUNT; i++) {
+			answer = answer && square[i].canMove(direction);
+		}
+
+		return answer;
+	}
+	
+	/**
+	 * Rotates the shape
+	 */
+	public void rotate() {
+		this.setLocations(calcRotate(this.getLocations()));
+	}
+	
+	/**
+	 * Drops the shape to the lowest row the shape can fit on top of.
+	 */
+	public void dropPiece() {
+		this.setLocations(calcDropPiece(this.getLocations(), grid));
+	}
 	
 	public Point[] calcRotate(Point[] p) {
 		
@@ -255,19 +387,7 @@ public abstract class Shape {
 //		return this.points;
 //	}
 	
-	abstract void draw(Graphics g);
 	
-	abstract void move(Direction direction);
-	
-	abstract boolean canMove(Direction direction);
-	
-	abstract Point[] getLocations();
-	
-	abstract void rotate();
-	
-	abstract void dropPiece();
-	
-	abstract Color getColor();
 	
 	
 }

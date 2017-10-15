@@ -19,7 +19,7 @@ public class Game {
 
 	private Tetris display; // the visual for the Tetris game
 
-	private Shape piece; // the current piece that is dropping
+	private Piece piece; // the current piece that is dropping
 
 	private boolean isOver; // has the game finished?
 	

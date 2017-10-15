@@ -138,6 +138,28 @@ public class TetrisUnitTest {
 //	}
 	
 	@Test
+	public void testLShape() {
+		int row = 0;
+		int col = 0;
+		// Creates a grid to test shape object movement
+		Grid toMoveOn = new Grid();
+		
+		// Creating LShape object
+		Piece shapeL = new LShape(4, 4, toMoveOn);
+		
+		Point[] p = shapeL.getLocations();
+		
+		// Testing original position
+		for (Point coord : p) {
+			int i = 0;
+			//Color color = shapeL.getColor();
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue((row == 3 || row == 4 || row == 5) && (col == 4 || col == 5));
+		}
+	}
+	
+	@Test
 	public void testLShapeRotate() {
 		int row = 0;
 		int col = 0;
