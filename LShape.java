@@ -17,8 +17,8 @@ import java.awt.Point;
  * @author CSC 143
  */
 public class LShape extends Shape {
-	private boolean ableToMove; // can this piece move
 	
+	private boolean ableToMove; // can this piece move
 
 	private Square[] square; // the squares that make up this piece
 
@@ -92,6 +92,10 @@ public class LShape extends Shape {
 		return points;
 	}
 	
+	/**
+	 * Accepts a Point[] array and sets columns and rows the Square objects in square[] array
+	 * @param points
+	 */
 	public void setLocations(Point[] points) {
 		//points = new Point[PIECE_COUNT];
 		for (int i = 0; i < PIECE_COUNT; i++) {
@@ -102,10 +106,16 @@ public class LShape extends Shape {
 		//return points;
 	}
 	
+	/**
+	 * Rotates the shape
+	 */
 	public void rotate() {
 		this.setLocations(super.calcRotate(this.getLocations()));
 	}
 	
+	/**
+	 * Drops the shape to the lowest row the shape can fit on top of.
+	 */
 	public void dropPiece() {
 		this.setLocations(super.calcDropPiece(this.getLocations(), grid));
 	}

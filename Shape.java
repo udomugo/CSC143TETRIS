@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 //import java.util.ArrayList;
 import java.util.HashSet;
@@ -252,4 +254,20 @@ public abstract class Shape {
 //	public Point[] getPoints() {
 //		return this.points;
 //	}
+	
+	abstract void draw(Graphics g);
+	
+	abstract void move(Direction direction);
+	
+	abstract boolean canMove(Direction direction);
+	
+	abstract Point[] getLocations();
+	
+	abstract void rotate();
+	
+	abstract void dropPiece();
+	
+	abstract Color getColor();
+	
+	
 }

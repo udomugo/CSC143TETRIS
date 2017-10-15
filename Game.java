@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.TreeSet;
 
 /**
@@ -18,9 +19,11 @@ public class Game {
 
 	private Tetris display; // the visual for the Tetris game
 
-	private LShape piece; // the current piece that is dropping
+	private Shape piece; // the current piece that is dropping
 
 	private boolean isOver; // has the game finished?
+	
+	private Random dice = new Random();
 
 	/**
 	 * Creates a Tetris game
@@ -225,7 +228,21 @@ public class Game {
 	private void updatePiece() {
 		if (piece == null) {
 			// CREATE A NEW PIECE HERE
-			piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
+			int rand = dice.nextInt(2);
+			switch(rand) {
+				case 0: {
+					piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
+					break;
+				}
+				case 1: {
+					piece = new TShape(1, Grid.WIDTH / 2 - 1, grid);
+					break;
+				}
+				//case 2: piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
+				//case 3: piece = new TShape(1, Grid.WIDTH / 2 - 1, grid);
+				//case 4: piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
+			}
+			
 		}
 
 		// set Grid positions corresponding to frozen piece
