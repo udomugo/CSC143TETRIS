@@ -17,15 +17,6 @@ import java.awt.Point;
  * @author CSC 143
  */
 public class LShape extends AbstractPiece {
-	
-	//private boolean ableToMove; // can this piece move
-
-	//protected Square[] square; // the squares that make up this piece
-
-	
-
-	// number of squares in one Tetris game piece
-	//private static final int PIECE_COUNT = 4;
 
 	/**
 	 * Creates an L-Shape piece. See class description for actual location of r
@@ -39,13 +30,9 @@ public class LShape extends AbstractPiece {
 	 *            the grid for this game piece
 	 * 
 	 */
-	public LShape(int r, int c, Grid g) {
-		super(g);
-		//this.square = super.getSquare();
+	public LShape(int c, int r, Grid g) {
 		
-		//grid = g; // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
-		//square = new Square[PIECE_COUNT];
-		//ableToMove = true;
+		super(g);
 
 		// Create the squares
 		square[0] = new Square(g, r - 1, c, Color.magenta, true);
@@ -53,90 +40,4 @@ public class LShape extends AbstractPiece {
 		square[2] = new Square(g, r + 1, c, Color.magenta, true);
 		square[3] = new Square(g, r + 1, c + 1, Color.magenta, true);
 	}
-
-	
-
-//	/**
-//	 * Moves the piece if possible Freeze the piece if it cannot move down
-//	 * anymore
-//	 * 
-//	 * @param direction
-//	 *            the direction to move
-//	 */
-//	public void move(Direction direction) {
-//		if (canMove(direction)) {
-//			for (int i = 0; i < PIECE_COUNT; i++)
-//				square[i].move(direction);
-//		}
-//		// if we couldn't move, see if because we're at the bottom
-//		else if (direction == Direction.DOWN) {
-//			ableToMove = false;
-//		}
-//	}
-
-//	/**
-//	 * Returns the (row,col) grid coordinates occupied by this Piece
-//	 * 
-//	 * @return an Array of (row,col) Points
-//	 */
-//	public Point[] getLocations() {
-//		Point[] points = new Point[PIECE_COUNT];
-//		for (int i = 0; i < PIECE_COUNT; i++) {
-//			points[i] = new Point(square[i].getCol(), square[i].getRow());
-//		}
-//		return points;
-//	}
-	
-//	/**
-//	 * Accepts a Point[] array and sets columns and rows the Square objects in square[] array
-//	 * @param points
-//	 */
-//	public void setLocations(Point[] points) {
-//		//points = new Point[PIECE_COUNT];
-//		for (int i = 0; i < PIECE_COUNT; i++) {
-//			square[i].setCol((int)points[i].getX());
-//			square[i].setRow((int)points[i].getY());
-//			//points[i] = new Point(square[i].getCol(), square[i].getRow());
-//		}
-//		//return points;
-//	}
-	
-//	/**
-//	 * Rotates the shape
-//	 */
-//	public void rotate() {
-//		this.setLocations(super.calcRotate(this.getLocations()));
-//	}
-//	
-//	/**
-//	 * Drops the shape to the lowest row the shape can fit on top of.
-//	 */
-//	public void dropPiece() {
-//		this.setLocations(super.calcDropPiece(this.getLocations(), grid));
-//	}
-
-//	/**
-//	 * Return the color of this piece
-//	 */
-//	public Color getColor() {
-//		// all squares of this piece have the same color
-//		return square[0].getColor();
-//	}
-
-//	/**
-//	 * Returns if this piece can move in the given direction
-//	 * 
-//	 */
-//	public boolean canMove(Direction direction) {
-//		if (!ableToMove)
-//			return false;
-//
-//		// Each square must be able to move in that direction
-//		boolean answer = true;
-//		for (int i = 0; i < PIECE_COUNT; i++) {
-//			answer = answer && square[i].canMove(direction);
-//		}
-//
-//		return answer;
-//	}
 }

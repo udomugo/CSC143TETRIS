@@ -34,7 +34,7 @@ public class Game {
 	public Game(Tetris display) {
 		grid = new Grid();
 		this.display = display;
-		piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
+		//piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
 		isOver = false;
 	}
 
@@ -231,23 +231,23 @@ public class Game {
 			int rand = dice.nextInt(14);
 			switch((int)(rand/3.14159)) {
 				case 0: {
-					piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
+					piece = new LShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
 				case 1: {
-					piece = new TShape(1, Grid.WIDTH / 2 - 1, grid);
+					piece = new TShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
 				case 2: {
-					piece = new SShape(1, Grid.WIDTH / 2 - 1, grid);
+					piece = new SShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
 				case 3: {
-					piece = new SquareShape(1, Grid.WIDTH / 2 - 1, grid);
+					piece = new SquareShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
 				case 4: {
-					piece = new BarShape(1, Grid.WIDTH / 2 - 1, grid);
+					piece = new BarShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
 			}

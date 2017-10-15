@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public interface Piece {
 	
-	//abstract Square[] getSquares();
+	//abstract void rotate();
 	
 	abstract void draw(Graphics g);
 	
