@@ -41,7 +41,7 @@ public class LShape extends Shape {
 	 * 
 	 */
 	public LShape(int r, int c, Grid g) {
-		//grid = g; // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
+		grid = g; // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
 		square = new Square[PIECE_COUNT];
 		ableToMove = true;
 
@@ -106,18 +106,9 @@ public class LShape extends Shape {
 		this.setLocations(super.calcRotate(this.getLocations()));
 	}
 	
-	
-	/**
-	 * Sets the row of all Squares within the LShape
-	 * 
-	 * @param row
-	 */
-//	public void setRow(int row) {
-//		for (int i = 0; i < PIECE_COUNT; i++) {
-//			int currentRow = row + square[i].getRow(); 
-//			square[i].setRow(currentRow);
-//		}
-//	}
+	public void dropPiece() {
+		this.setLocations(super.calcDropPiece(this.getLocations(), grid));
+	}
 
 	/**
 	 * Return the color of this piece
@@ -143,9 +134,4 @@ public class LShape extends Shape {
 
 		return answer;
 	}
-	
-//	//@Override
-//	public Square[] getSquare() {
-//		return this.square;
-//	}
 }

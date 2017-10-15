@@ -156,12 +156,6 @@ public class TetrisUnitTest {
 			row = (int) coord.getY();
 			col = (int) coord.getX();
 			assertTrue((row == 3 || row == 4 || row == 5) && (col == 4 || col == 5));
-//			if ( (row == 3 || row == 4 || row == 5) && (col == 4 || col == 5) ) {
-//				shapeL.square[i].
-//				assertTrue();
-//			} else {
-//				assertFalse(false);
-//			}
 		}
 		
 		
@@ -177,12 +171,80 @@ public class TetrisUnitTest {
 			row = (int) coord.getY();
 			col = (int) coord.getX();
 			assertTrue((row == 4 || row == 5) && (col == 3 || col == 4 || col == 5));
-//			if ( (row == 4 || row == 5) && (col == 3 || col == 4 || col == 5) ) {
-//				assertTrue(true);
-//			} else {
-//				assertFalse(false);
-//			}
+		}
+	}
+	
+	@Test
+	public void testTShapeRotate() {
+		int row = 0;
+		int col = 0;
+		// Creates a grid to test shape object movement
+		Grid toMoveOn = new Grid();
+		
+		// Creating LShape object
+		LShape shapeL = new LShape(4, 4, toMoveOn);
+		
+		Point[] p = shapeL.getLocations();
+		
+		// Testing original position
+		for (Point coord : p) {
+			int i = 0;
+			//Color color = shapeL.getColor();
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue((row == 3 || row == 4 || row == 5) && (col == 4 || col == 5));
 		}
 		
+		
+
+		
+		//shapeL.rotate(shapeL.getLocations());
+		shapeL.rotate();
+		
+		p = shapeL.getLocations();
+		
+		// Testing rotated position
+		for (Point coord : p) {
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue((row == 4 || row == 5) && (col == 3 || col == 4 || col == 5));
+		}
+	}
+	
+	@Test
+	public void testShapeDrop() {
+		int row = 0;
+		int col = 0;
+		// Creates a grid to test shape object movement
+		Grid toMoveOn = new Grid();
+		
+		// Creating LShape object
+		LShape shapeL = new LShape(4, 4, toMoveOn);
+		
+		Point[] p = shapeL.getLocations();
+		
+		// Testing original position
+		for (Point coord : p) {
+			int i = 0;
+			//Color color = shapeL.getColor();
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue((row == 3 || row == 4 || row == 5) && (col == 4 || col == 5));
+		}
+		
+		
+
+		
+		//shapeL.rotate(shapeL.getLocations());
+		shapeL.dropPiece();
+		
+		p = shapeL.getLocations();
+		
+		// Testing rotated position
+		for (Point coord : p) {
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue((row == 19 || row == 18 || row == 17) && ( col == 4 || col == 5));
+		}
 	}
 }

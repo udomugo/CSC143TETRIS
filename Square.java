@@ -98,9 +98,6 @@ public class Square {
 			if (row == (Grid.HEIGHT - 1) || grid.isSet(row + 1, col))
 				move = false;
 			break;
-
-		// currently doesn't support checking LEFT or RIGHT
-		// MODIFY so that it correctly returns if it can move left or right
 		case LEFT:
 			if(col == 0 || grid.isSet(row, col - 1)) {
 				move = false;
@@ -133,9 +130,6 @@ public class Square {
 			case DOWN:
 				row = row + 1;
 				break;
-
-			// currently doesn't support moving LEFT or RIGHT
-			// MODIFY so that the Square moves appropriately
 			case LEFT:
 				col--;
 				break;
@@ -145,16 +139,6 @@ public class Square {
 			}
 		}
 	}
-
-//	Will probably remove these methods
-//	public void forceMove() {
-//		
-//		this.ableToMove = true;
-//	}
-//	
-//	public void forceUnmovable() {
-//		this.ableToMove = false;
-//	}
 
 	/**
 	 * Changes the color of this square

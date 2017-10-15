@@ -1,4 +1,5 @@
 import java.awt.Point;
+//import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -17,12 +18,6 @@ public abstract class Shape {
 		points = p;
 		x = (int) points[1].getX();
 		y = (int) points[1].getY();
-//		lengthX = getXperimeter(points);
-//		lengthY = getYperimeter(points);
-//		int[] xCoord1 = new int[4];
-//		int[] xCoord2 = new int[4];
-//		int[] yCoord1 = new int[4];
-//		int[] yCoord2 = new int[4];
 		
 		int row = 0;
 		int col = 0;
@@ -97,6 +92,89 @@ public abstract class Shape {
 //		}
 	}
 	
+	
+	public Point[] calcDropPiece(Point[] p, Grid grid) {
+		
+		//Grid grid = g;
+		int rowAbove = 0; 
+		int travelDist = 0;
+		//ArrayList<Integer> memYvalue = new ArrayList<Integer>();
+		TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
+		
+		// measuring the distance from the shape to the lowest row
+		for ( Point coord : p) {
+			for ( int row = (int)coord.getY(); row < Grid.HEIGHT; row++ ) {
+				if(grid.isSet(row, (int) coord.getX())) {
+					rowAbove = row - 1;
+					lowestYvalues.add( rowAbove - (int)coord.getY());
+					break;
+				} else if(row == Grid.HEIGHT - 1) {
+					rowAbove = Grid.HEIGHT - 1;
+					lowestYvalues.add( rowAbove - (int)coord.getY());
+					break;
+				}
+			}	
+		}
+		
+		// selecting the drop row value
+		travelDist = lowestYvalues.pollFirst();
+		
+		// setting the new shape coordinates
+		for ( Point coord : p) {
+			coord.setLocation((int)coord.getX(), 
+					travelDist + (int)coord.getY());
+		}
+		// returning the new location
+		return p;
+	}
+	
+	/**
+	 * Gets the total shape width
+	 * 
+	 * @return
+	 */
+	public int getXperimeter() {
+		//Point[] p = piece.getLocations();
+		Set<Integer> xValue = new HashSet<Integer>();
+		for ( int i = 0; i < points.length; i++) {
+			xValue.add((int)points[i].getX());
+		}
+		return xValue.size();
+	}
+	
+	/**
+	 * Gets the total shape Height
+	 * 
+	 * @return
+	 */
+	public int getYperimeter() {
+		//Point[] p = piece.getLocations();
+		Set<Integer> yValue = new HashSet<Integer>();
+		for ( int i = 0; i < points.length; i++) {
+			yValue.add((int)points[i].getY());
+		}
+		return yValue.size();
+	}
+	
+	public int getShapeGreatestY() {
+		//Point[] p = piece.getLocations();
+		TreeSet<Integer> yValue = new TreeSet<Integer>();
+		for ( int i = 0; i < points.length; i++) {
+			yValue.add((int)points[i].getY());
+		}
+		return yValue.pollLast();
+	}
+	
+	public int getShapeLowestX() {
+		//Point[] p = piece.getLocations();
+		TreeSet<Integer> xValue = new TreeSet<Integer>();
+		for ( int i = 0; i < points.length; i++) {
+			xValue.add((int)points[i].getX());
+		}
+		return xValue.pollFirst();
+	}
+	
+	
 //	private Square[] square;
 //	
 //	public boolean rotate(Shape piece) {
@@ -148,30 +226,30 @@ public abstract class Shape {
 	 * 
 	 * @return
 	 */
-	public int getXperimeter(Point[] p) {
-		//Point[] p = piece.getLocations();
-		Set<Integer> xValue = new HashSet<Integer>();
-		for ( int i = 0; i < p.length; i++) {
-			xValue.add((int)p[i].getX());
-		}
-		return xValue.size();
-	}
-	
-	/**
-	 * Gets the total shape Height
-	 * 
-	 * @return
-	 */
-	public int getYperimeter(Point[] p) {
-		//Point[] p = piece.getLocations();
-		Set<Integer> yValue = new HashSet<Integer>();
-		for ( int i = 0; i < p.length; i++) {
-			yValue.add((int)p[i].getY());
-		}
-		return yValue.size();
-	}
-	
-	public Point[] getPoints() {
-		return this.points;
-	}
+//	public int getXperimeter(Point[] p) {
+//		//Point[] p = piece.getLocations();
+//		Set<Integer> xValue = new HashSet<Integer>();
+//		for ( int i = 0; i < p.length; i++) {
+//			xValue.add((int)p[i].getX());
+//		}
+//		return xValue.size();
+//	}
+//	
+//	/**
+//	 * Gets the total shape Height
+//	 * 
+//	 * @return
+//	 */
+//	public int getYperimeter(Point[] p) {
+//		//Point[] p = piece.getLocations();
+//		Set<Integer> yValue = new HashSet<Integer>();
+//		for ( int i = 0; i < p.length; i++) {
+//			yValue.add((int)p[i].getY());
+//		}
+//		return yValue.size();
+//	}
+//	
+//	public Point[] getPoints() {
+//		return this.points;
+//	}
 }

@@ -98,47 +98,49 @@ public class Game {
 	 * 
 	 */
 	public void dropPiece() {
-		if (piece != null) {		
-		
-			Point[] p = piece.getLocations();
-			//int startRow = (int) p[0].getY();
-			int startRow = getShapeGreatestY();
-			int col = getShapeLowestX();
-			int targetRow = 0;
-			int wide = getXperimeter();
-			//int tall = getYperimeter();
-			int rowAbove = 0; 
-			int travelDist = 0;
-			ArrayList<Integer> memYvalue = new ArrayList<Integer>();
-			TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
+		if (piece != null) {
 			
+			piece.dropPiece();
 			
-			//lowestYvalues.clear();
-			for ( Point coord : p) {
-				
-				
-					for ( int row = (int)coord.getY(); row < Grid.HEIGHT; row++ ) {
-						if(grid.isSet(row, (int) coord.getX())) {
-							rowAbove = row - 1;
-							lowestYvalues.add( rowAbove - (int)coord.getY());
-							break;
-						} else if(row == Grid.HEIGHT - 1) {
-							rowAbove = Grid.HEIGHT - 1;
-							lowestYvalues.add( rowAbove - (int)coord.getY());
-							break;
-						}
-					}
-					
-			}
+//			Point[] p = piece.getLocations();
+//			//int startRow = (int) p[0].getY();
+//			int startRow = getShapeGreatestY();
+//			int col = getShapeLowestX();
+//			int targetRow = 0;
+//			int wide = getXperimeter();
+//			//int tall = getYperimeter();
+//			int rowAbove = 0; 
+//			int travelDist = 0;
+//			ArrayList<Integer> memYvalue = new ArrayList<Integer>();
+//			TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
+//			
+//			
+//			//lowestYvalues.clear();
+//			for ( Point coord : p) {
+//				
+//				
+//					for ( int row = (int)coord.getY(); row < Grid.HEIGHT; row++ ) {
+//						if(grid.isSet(row, (int) coord.getX())) {
+//							rowAbove = row - 1;
+//							lowestYvalues.add( rowAbove - (int)coord.getY());
+//							break;
+//						} else if(row == Grid.HEIGHT - 1) {
+//							rowAbove = Grid.HEIGHT - 1;
+//							lowestYvalues.add( rowAbove - (int)coord.getY());
+//							break;
+//						}
+//					}
+//					
+//			}
+//			
+//			travelDist = lowestYvalues.pollFirst();
+//			
+//			for ( Point coord : p) {
+//				coord.setLocation((int)coord.getX(), 
+//						travelDist + (int)coord.getY());
+//			}
 			
-			travelDist = lowestYvalues.pollFirst();
-			
-			for ( Point coord : p) {
-				coord.setLocation((int)coord.getX(), 
-						travelDist + (int)coord.getY());
-			}
-			
-			piece.setLocations(p);
+			//piece.setLocations(p);
 			
 	 		updatePiece();
 			display.update();
@@ -146,51 +148,51 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Gets the total shape width
-	 * 
-	 * @return
-	 */
-	public int getXperimeter() {
-		Point[] p = piece.getLocations();
-		Set<Integer> xValue = new HashSet<Integer>();
-		for ( int i = 0; i < p.length; i++) {
-			xValue.add((int)p[i].getX());
-		}
-		return xValue.size();
-	}
-	
-	/**
-	 * Gets the total shape Height
-	 * 
-	 * @return
-	 */
-	public int getYperimeter() {
-		Point[] p = piece.getLocations();
-		Set<Integer> yValue = new HashSet<Integer>();
-		for ( int i = 0; i < p.length; i++) {
-			yValue.add((int)p[i].getY());
-		}
-		return yValue.size();
-	}
-	
-	public int getShapeGreatestY() {
-		Point[] p = piece.getLocations();
-		TreeSet<Integer> yValue = new TreeSet<Integer>();
-		for ( int i = 0; i < p.length; i++) {
-			yValue.add((int)p[i].getY());
-		}
-		return yValue.pollLast();
-	}
-	
-	public int getShapeLowestX() {
-		Point[] p = piece.getLocations();
-		TreeSet<Integer> xValue = new TreeSet<Integer>();
-		for ( int i = 0; i < p.length; i++) {
-			xValue.add((int)p[i].getX());
-		}
-		return xValue.pollFirst();
-	}
+//	/**
+//	 * Gets the total shape width
+//	 * 
+//	 * @return
+//	 */
+//	public int getXperimeter() {
+//		Point[] p = piece.getLocations();
+//		Set<Integer> xValue = new HashSet<Integer>();
+//		for ( int i = 0; i < p.length; i++) {
+//			xValue.add((int)p[i].getX());
+//		}
+//		return xValue.size();
+//	}
+//	
+//	/**
+//	 * Gets the total shape Height
+//	 * 
+//	 * @return
+//	 */
+//	public int getYperimeter() {
+//		Point[] p = piece.getLocations();
+//		Set<Integer> yValue = new HashSet<Integer>();
+//		for ( int i = 0; i < p.length; i++) {
+//			yValue.add((int)p[i].getY());
+//		}
+//		return yValue.size();
+//	}
+//	
+//	public int getShapeGreatestY() {
+//		Point[] p = piece.getLocations();
+//		TreeSet<Integer> yValue = new TreeSet<Integer>();
+//		for ( int i = 0; i < p.length; i++) {
+//			yValue.add((int)p[i].getY());
+//		}
+//		return yValue.pollLast();
+//	}
+//	
+//	public int getShapeLowestX() {
+//		Point[] p = piece.getLocations();
+//		TreeSet<Integer> xValue = new TreeSet<Integer>();
+//		for ( int i = 0; i < p.length; i++) {
+//			xValue.add((int)p[i].getX());
+//		}
+//		return xValue.pollFirst();
+//	}
 
 
 	/**
