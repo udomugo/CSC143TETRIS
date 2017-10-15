@@ -228,8 +228,8 @@ public class Game {
 	private void updatePiece() {
 		if (piece == null) {
 			// CREATE A NEW PIECE HERE
-			int rand = dice.nextInt(2);
-			switch(rand) {
+			int rand = dice.nextInt(14);
+			switch((int)(rand/3.14159)) {
 				case 0: {
 					piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
 					break;
@@ -238,9 +238,18 @@ public class Game {
 					piece = new TShape(1, Grid.WIDTH / 2 - 1, grid);
 					break;
 				}
-				//case 2: piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
-				//case 3: piece = new TShape(1, Grid.WIDTH / 2 - 1, grid);
-				//case 4: piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
+				case 2: {
+					piece = new SShape(1, Grid.WIDTH / 2 - 1, grid);
+					break;
+				}
+				case 3: {
+					piece = new SquareShape(1, Grid.WIDTH / 2 - 1, grid);
+					break;
+				}
+				case 4: {
+					piece = new BarShape(1, Grid.WIDTH / 2 - 1, grid);
+					break;
+				}
 			}
 			
 		}

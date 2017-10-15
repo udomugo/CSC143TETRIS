@@ -7,16 +7,16 @@ import java.awt.Point;
  * 
  * This piece is made up of 4 squares in the following configuration:
  * 
- * Sq <br>
  * Sq Sq<br>
- * Sq  <br>
+ * Sq Sq <br>
  * 
- * The game piece "floats above" the Grid. The (col, row) coordinates are the
+ * 
+ * The game piece "floats above" the Grid. The (row, col) coordinates are the
  * location of the middle Square on the side within the Grid
  * 
  * @author CSC 143
  */
-public class TShape extends Shape {
+public class SquareShape extends Shape {
 	
 	private boolean ableToMove; // can this piece move
 
@@ -40,16 +40,16 @@ public class TShape extends Shape {
 	 *            the grid for this game piece
 	 * 
 	 */
-	public TShape(int r, int c, Grid g) {
+	public SquareShape(int r, int c, Grid g) {
 		grid = g; // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
 		square = new Square[PIECE_COUNT];
 		ableToMove = true;
 
 		// Create the squares
-		square[0] = new Square(g, r - 1, c, Color.lightGray, true);
-		square[1] = new Square(g, r, c, Color.lightGray, true);
-		square[2] = new Square(g, r + 1, c, Color.lightGray, true);
-		square[3] = new Square(g, r, c + 1, Color.lightGray, true);
+		square[0] = new Square(g, r - 1, c, Color.cyan, true);
+		square[1] = new Square(g, r, c, Color.cyan, true);
+		square[2] = new Square(g, r - 1, c + 1, Color.cyan, true);
+		square[3] = new Square(g, r, c + 1, Color.cyan, true);
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class TShape extends Shape {
 	 * Rotates the shape
 	 */
 	public void rotate() {
-		this.setLocations(super.calcRotate(this.getLocations()));
+		//this.setLocations(super.calcRotate(this.getLocations()));
 	}
 	
 	/**
