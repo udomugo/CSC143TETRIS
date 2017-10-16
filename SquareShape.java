@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 /**
- * An L-Shape piece in the Tetris Game.
+ * An Square-Shape piece in the Tetris Game.
  * 
  * This piece is made up of 4 squares in the following configuration:
  * 
@@ -37,10 +37,10 @@ public class SquareShape extends AbstractPiece {
 //		ableToMove = true;
 
 		// Create the squares
-		square[0] = new Square(g, r - 1, c, Color.cyan, true);
+		square[0] = new Square(g, r, c - 1, Color.cyan, true);
 		square[1] = new Square(g, r, c, Color.cyan, true);
-		square[2] = new Square(g, r - 1, c + 1, Color.cyan, true);
-		square[3] = new Square(g, r, c + 1, Color.cyan, true);
+		square[2] = new Square(g, r + 1, c - 1, Color.cyan, true);
+		square[3] = new Square(g, r + 1, c, Color.cyan, true);
 	}
 	public void rotate() {
 		//this.setLocations(super.calcRotate(this.getLocations()));

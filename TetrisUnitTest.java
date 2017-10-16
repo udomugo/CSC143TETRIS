@@ -158,6 +158,31 @@ public class TetrisUnitTest {
 	}
 	
 	/**
+	 * Test the creation of a SquareShape Piece Object
+	 */
+	@Test
+	public void testCreateSquareShape() {
+		int row = 0;
+		int col = 0;
+		// Creates a grid to test shape object movement
+		Grid toMoveOn = new Grid();
+		
+		// Creating LShape object
+		Piece squareShape = new SquareShape(4, 4, toMoveOn);
+		
+		Point[] p = squareShape.getLocations();
+		
+		// Testing original position
+		for (Point coord : p) {
+			
+			//Color color = shapeL.getColor();
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue(( row == 4 || row == 5) && (col == 3 || col == 4));
+		}
+	}
+	
+	/**
 	 * Test the creation of a SShape Piece Object
 	 */
 	@Test

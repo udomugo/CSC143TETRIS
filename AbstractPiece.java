@@ -41,12 +41,6 @@ public abstract class AbstractPiece implements Piece{
 		grid = g; // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
 		square = new Square[PIECE_COUNT];
 		ableToMove = true;
-
-//		// Create the squares
-//		square[0] = new Square(g, r - 1, c, Color.magenta, true);
-//		square[1] = new Square(g, r, c, Color.magenta, true);
-//		square[2] = new Square(g, r + 1, c, Color.magenta, true);
-//		square[3] = new Square(g, r + 1, c + 1, Color.magenta, true);
 	}
 	
 	/**
@@ -132,13 +126,6 @@ public abstract class AbstractPiece implements Piece{
 
 		return answer;
 	}
-	
-	/**
-	 * Rotates the shape
-	 */
-//	public void rotate() {
-//		this.setLocations(calcRotate(this.getLocations()));
-//	}
 	
 	/**
 	 * Drops the shape to the lowest row the shape can fit on top of.
@@ -282,88 +269,5 @@ public abstract class AbstractPiece implements Piece{
 			xValue.add((int)points[i].getX());
 		}
 		return xValue.pollFirst();
-	}
-	
-	
-//	private Square[] square;
-//	
-//	public boolean rotate(Shape piece) {
-//		System.out.println(piece.getClass().toString());
-//		String evalClass = piece.getClass().toString();
-//		System.out.println(evalClass);
-//		return evalClass.equals("class LShape");
-//		//piece = (LShape) piece;
-//		this.square = ((LShape) piece).getSquare();
-//	}
-//	
-//	public abstract Square[] getSquare();
-//	
-//	public void dropPiece() {
-//		if (piece != null) {		
-//		
-//		Point[] p = piece.getLocations();
-//		int startRow = (int) p[0].getY();
-//		int col = (int) p[0].getX();
-//		int targetRow = 0;
-//		int wide = getXperimeter();
-//		int tall = getYperimeter();
-//		TreeSet<Integer> bottomValues = new TreeSet<Integer>();
-//		
-//		
-//		for ( int i = col; i < wide + col; i++) {
-//			for ( int row = startRow + tall; row < Grid.HEIGHT; row++ ) {
-//				if(grid.isSet(row, i)) {
-//					bottomValues.add(row - 1);
-//					break;
-//				} else if(row == Grid.HEIGHT - 1) {
-//					bottomValues.add(row);
-//					break;
-//				}
-//			}
-//		}
-//		int lowestValue =  bottomValues.pollFirst();
-//		targetRow = lowestValue - startRow - 2;
-//		
-// 		piece.setRow(targetRow);
-//		updatePiece();
-//		display.update();
-//		grid.checkRows();
-//		}
-//	}
-	
-	/**
-	 * Gets the total shape width
-	 * 
-	 * @return
-	 */
-//	public int getXperimeter(Point[] p) {
-//		//Point[] p = piece.getLocations();
-//		Set<Integer> xValue = new HashSet<Integer>();
-//		for ( int i = 0; i < p.length; i++) {
-//			xValue.add((int)p[i].getX());
-//		}
-//		return xValue.size();
-//	}
-//	
-//	/**
-//	 * Gets the total shape Height
-//	 * 
-//	 * @return
-//	 */
-//	public int getYperimeter(Point[] p) {
-//		//Point[] p = piece.getLocations();
-//		Set<Integer> yValue = new HashSet<Integer>();
-//		for ( int i = 0; i < p.length; i++) {
-//			yValue.add((int)p[i].getY());
-//		}
-//		return yValue.size();
-//	}
-//	
-//	public Point[] getPoints() {
-//		return this.points;
-//	}
-	
-	
-	
-	
+	}	
 }
