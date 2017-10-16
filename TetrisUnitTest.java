@@ -6,7 +6,9 @@ import java.awt.Point;
 import org.junit.Test;
 
 public class TetrisUnitTest {
-
+	/**
+	 * Tests checkRows() method
+	 */
 	@Test
 	public void testCheckRows() {
 		// Create a grid with a full row at the bottom
@@ -37,6 +39,9 @@ public class TetrisUnitTest {
 		}
 	}
 	
+	/**
+	 * Tests checkRows() method with larger pattern of filled and empty squares on Tetris grid play are
+	 */
 	@Test
 	public void testCheckRowsBigger() {
 		// Creates a grid to test a full row on the bottom and then checker board fills
@@ -46,7 +51,6 @@ public class TetrisUnitTest {
 		// Setting the bottom row to all be non EMPTY Square Objects
 		for ( int col = 0; col < Grid.WIDTH; col++ )
 			myGrid.set(Grid.HEIGHT -1, col, Color.ORANGE);
-		
 		
 		// Setting the second to bottom row to alternate non EMPTY Square
 		//	Objects starting with index 0
@@ -99,6 +103,9 @@ public class TetrisUnitTest {
 		}
 	}
 	
+	/**
+	 * Tests the LShape Piece from construction to the first rotation position
+	 */
 	@Test
 	public void testLShapeMoveDirection() {
 		
@@ -125,20 +132,11 @@ public class TetrisUnitTest {
 		assertTrue( 5 == (int)shapeL.getLocations()[1].getY());
 	}
 	
-//	@Test
-//	public void testShapeGetClass() {
-//		// Creates a grid to test shape object movement
-//		Grid toMoveOn = new Grid();
-//		
-//		// Creating LShape object
-//		LShape shapeL = new LShape(4, 4, toMoveOn);
-//		//Shape piece = new LShape();
-//		shapeL.rotate(shapeL.getLocations());
-//		assertTrue(shapeL.rotate(shapeL.getLocations()));
-//	}
-	
+	/**
+	 * Test the creation of a LShape Piece Object
+	 */
 	@Test
-	public void testLShape() {
+	public void testCreateLShape() {
 		int row = 0;
 		int col = 0;
 		// Creates a grid to test shape object movement
@@ -159,6 +157,59 @@ public class TetrisUnitTest {
 		}
 	}
 	
+	/**
+	 * Test the creation of a SShape Piece Object
+	 */
+	@Test
+	public void testCreateSShape() {
+		int row = 0;
+		int col = 0;
+		// Creates a grid to test shape object movement
+		Grid toMoveOn = new Grid();
+		
+		// Creating LShape object
+		Piece sShape = new SShape(4, 4, toMoveOn);
+		
+		Point[] p = sShape.getLocations();
+		
+		// Testing original position
+		for (Point coord : p) {
+			
+			//Color color = shapeL.getColor();
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue(( row == 4 || row == 5) && (col == 3 || col == 4 || col == 5));
+		}
+	}
+	
+	/**
+	 * Test the creation of a SShape Piece Object
+	 */
+	@Test
+	public void testCreateZShape() {
+		int row = 0;
+		int col = 0;
+		// Creates a grid to test shape object movement
+		Grid toMoveOn = new Grid();
+		
+		// Creating LShape object
+		Piece sShape = new SShape(4, 4, toMoveOn);
+		
+		Point[] p = sShape.getLocations();
+		
+		// Testing original position
+		for (Point coord : p) {
+			
+			//Color color = shapeL.getColor();
+			row = (int) coord.getY();
+			col = (int) coord.getX();
+			assertTrue(( row == 4 || row == 5) && (col == 3 || col == 4 || col == 5));
+		}
+	}
+	
+	/**
+	 * Tests the rotation of LShape Piece Object
+	 */
 	@Test
 	public void testLShapeRotate() {
 		int row = 0;
@@ -180,10 +231,6 @@ public class TetrisUnitTest {
 			assertTrue((row == 3 || row == 4 || row == 5) && (col == 4 || col == 5));
 		}
 		
-		
-
-		
-		//shapeL.rotate(shapeL.getLocations());
 		shapeL.rotate();
 		
 		p = shapeL.getLocations();
@@ -196,6 +243,9 @@ public class TetrisUnitTest {
 		}
 	}
 	
+	/**
+	 * Tests the rotation of a TShape Piece Object
+	 */
 	@Test
 	public void testTShapeRotate() {
 		int row = 0;
@@ -216,10 +266,6 @@ public class TetrisUnitTest {
 			assertTrue((row == 3 || row == 4 || row == 5) && (col == 4 || col == 5));
 		}
 		
-		
-
-		
-		//shapeL.rotate(shapeL.getLocations());
 		shapeT.rotate();
 		
 		p = shapeT.getLocations();
@@ -232,6 +278,9 @@ public class TetrisUnitTest {
 		}
 	}
 	
+	/**
+	 * Tests the rotation collision detection of an LShape Piece Object
+	 */
 	@Test
 	public void testLShapeRotateCollide() {
 		int row = 0;
@@ -247,16 +296,11 @@ public class TetrisUnitTest {
 		// Testing original position
 		for (Point coord : p) {
 			int i = 0;
-			//Color color = shapeL.getColor();
 			row = (int) coord.getY();
 			col = (int) coord.getX();
 			assertTrue((row == 3 || row == 4 || row == 5) && (col == 0 || col == 1));
 		}
 		
-		
-
-		
-		//shapeL.rotate(shapeL.getLocations());
 		shapeL.rotate();
 		
 		p = shapeL.getLocations();
@@ -269,6 +313,9 @@ public class TetrisUnitTest {
 		}
 	}
 	
+	/**
+	 * Tests the dropPiece() method of a Piece Object
+	 */
 	@Test
 	public void testShapeDrop() {
 		int row = 0;
@@ -290,10 +337,6 @@ public class TetrisUnitTest {
 			assertTrue((row == 3 || row == 4 || row == 5) && (col == 4 || col == 5));
 		}
 		
-		
-
-		
-		//shapeL.rotate(shapeL.getLocations());
 		shapeL.dropPiece();
 		
 		p = shapeL.getLocations();

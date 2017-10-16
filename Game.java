@@ -228,26 +228,37 @@ public class Game {
 	private void updatePiece() {
 		if (piece == null) {
 			// CREATE A NEW PIECE HERE
-			int rand = dice.nextInt(14);
-			switch((int)(rand/3.14159)) {
-				case 0: {
+			int rand = 0;
+			while (rand == 0) {
+				rand = (int)(dice.nextInt(23)/3.14159);
+			}
+			switch(rand) {
+				case 1: {
 					piece = new LShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
-				case 1: {
+				case 2: {
 					piece = new TShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
-				case 2: {
+				case 3: {
 					piece = new SShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
-				case 3: {
+				case 4: {
 					piece = new SquareShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
-				case 4: {
+				case 5: {
 					piece = new BarShape(Grid.WIDTH / 2 - 1, 1, grid);
+					break;
+				}
+				case 6: {
+					piece = new JShape(Grid.WIDTH / 2 - 1, 1, grid);
+					break;
+				}
+				case 7: {
+					piece = new ZShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
 			}
