@@ -54,11 +54,6 @@ public class EventController extends KeyAdapter implements ActionListener {
 		if (!gameOver) {
 			switch (e.getKeyCode()) {
 			// Spacebar will execute an immediate drop game piece to the lowest position possible
-			case KeyEvent.VK_SPACE:
-				timer.stop();
-				game.dropPiece();
-				timer.start();
-				break;
 			// HANDLE other keystrokes here
 			case KeyEvent.VK_LEFT:
 				handleMove(Direction.LEFT);
@@ -72,6 +67,11 @@ public class EventController extends KeyAdapter implements ActionListener {
 			case KeyEvent.VK_UP:
 				timer.stop();
 				handleRotate();
+				timer.start();
+				break;
+			case KeyEvent.VK_SPACE:
+				timer.stop();
+				handleDrop();
 				timer.start();
 				break;
 			}
@@ -95,6 +95,13 @@ public class EventController extends KeyAdapter implements ActionListener {
 	
 	private void handleRotate() {
 		game.rotatePiece();
+		gameOver = game.isGameOver();
+		if (gameOver)
+			timer.stop();
+	}
+	
+	private void handleDrop() {
+		game.dropPiece();
 		gameOver = game.isGameOver();
 		if (gameOver)
 			timer.stop();

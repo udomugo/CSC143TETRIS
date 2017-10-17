@@ -10,8 +10,8 @@ public abstract class AbstractPiece implements Piece{
 	
 	private static int x = 0;
 	private static int y = 0;
-	private static int lengthX = 0;
-	private static int lengthY = 0;
+	//private static int lengthX = 0;
+	//private static int lengthY = 0;
 	
 	private static Point[] points;
 	
@@ -37,7 +37,7 @@ public abstract class AbstractPiece implements Piece{
 	 *            the grid for this game piece
 	 * 
 	 */
-	public AbstractPiece(Grid g) {
+	protected AbstractPiece(Grid g) {
 		grid = g; // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
 		square = new Square[PIECE_COUNT];
 		ableToMove = true;
@@ -230,7 +230,7 @@ public abstract class AbstractPiece implements Piece{
 	 * 
 	 * @return
 	 */
-	public int getXperimeter() {
+	private int getXperimeter() {
 		//Point[] p = piece.getLocations();
 		Set<Integer> xValue = new HashSet<Integer>();
 		for ( int i = 0; i < points.length; i++) {
@@ -244,7 +244,7 @@ public abstract class AbstractPiece implements Piece{
 	 * 
 	 * @return
 	 */
-	public int getYperimeter() {
+	private int getYperimeter() {
 		//Point[] p = piece.getLocations();
 		Set<Integer> yValue = new HashSet<Integer>();
 		for ( int i = 0; i < points.length; i++) {
@@ -253,7 +253,7 @@ public abstract class AbstractPiece implements Piece{
 		return yValue.size();
 	}
 	
-	public int getShapeGreatestY() {
+	private int getShapeGreatestY() {
 		//Point[] p = piece.getLocations();
 		TreeSet<Integer> yValue = new TreeSet<Integer>();
 		for ( int i = 0; i < points.length; i++) {
@@ -262,7 +262,7 @@ public abstract class AbstractPiece implements Piece{
 		return yValue.pollLast();
 	}
 	
-	public int getShapeLowestX() {
+	private int getShapeLowestX() {
 		//Point[] p = piece.getLocations();
 		TreeSet<Integer> xValue = new TreeSet<Integer>();
 		for ( int i = 0; i < points.length; i++) {
