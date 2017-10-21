@@ -24,6 +24,9 @@ public class Game {
 	private boolean isOver; // has the game finished?
 	
 	private Random dice = new Random();
+	
+	// Tracking the random numbers that generate shapes
+	public static int[] shapeGenOutput = new int[8];
 
 	/**
 	 * Creates a Tetris game
@@ -34,7 +37,6 @@ public class Game {
 	public Game(Tetris display) {
 		grid = new Grid();
 		this.display = display;
-		//piece = new LShape(1, Grid.WIDTH / 2 - 1, grid);
 		isOver = false;
 	}
 
@@ -75,26 +77,6 @@ public class Game {
 		display.update();
 		grid.checkRows();
 	}
-	
-	
-//	public boolean findTargetRow() {
-//		
-//		Point[] p = piece.getLocations();
-//		//int startRow = (int) p[0].getY();
-//		int startRow = getShapeGreatestY();
-//		int col = getShapeLowestX();
-//		int targetRow = 0;
-//		int wide = getXperimeter();
-//		//int tall = getYperimeter();
-//		int rowAbove = 0; 
-//		ArrayList<Integer> memYvalue = new ArrayList<Integer>();
-//		TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
-//		
-//		
-//		
-//		return false;
-//	}
-	
 	/**
 	 * Drops the current piece to the lowest possible position
 	 * 
@@ -105,97 +87,11 @@ public class Game {
 			
 			piece.dropPiece();
 			
-//			Point[] p = piece.getLocations();
-//			//int startRow = (int) p[0].getY();
-//			int startRow = getShapeGreatestY();
-//			int col = getShapeLowestX();
-//			int targetRow = 0;
-//			int wide = getXperimeter();
-//			//int tall = getYperimeter();
-//			int rowAbove = 0; 
-//			int travelDist = 0;
-//			ArrayList<Integer> memYvalue = new ArrayList<Integer>();
-//			TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
-//			
-//			
-//			//lowestYvalues.clear();
-//			for ( Point coord : p) {
-//				
-//				
-//					for ( int row = (int)coord.getY(); row < Grid.HEIGHT; row++ ) {
-//						if(grid.isSet(row, (int) coord.getX())) {
-//							rowAbove = row - 1;
-//							lowestYvalues.add( rowAbove - (int)coord.getY());
-//							break;
-//						} else if(row == Grid.HEIGHT - 1) {
-//							rowAbove = Grid.HEIGHT - 1;
-//							lowestYvalues.add( rowAbove - (int)coord.getY());
-//							break;
-//						}
-//					}
-//					
-//			}
-//			
-//			travelDist = lowestYvalues.pollFirst();
-//			
-//			for ( Point coord : p) {
-//				coord.setLocation((int)coord.getX(), 
-//						travelDist + (int)coord.getY());
-//			}
-			
-			//piece.setLocations(p);
-			
 	 		updatePiece();
 			display.update();
 			grid.checkRows();
 		}
 	}
-	
-//	/**
-//	 * Gets the total shape width
-//	 * 
-//	 * @return
-//	 */
-//	public int getXperimeter() {
-//		Point[] p = piece.getLocations();
-//		Set<Integer> xValue = new HashSet<Integer>();
-//		for ( int i = 0; i < p.length; i++) {
-//			xValue.add((int)p[i].getX());
-//		}
-//		return xValue.size();
-//	}
-//	
-//	/**
-//	 * Gets the total shape Height
-//	 * 
-//	 * @return
-//	 */
-//	public int getYperimeter() {
-//		Point[] p = piece.getLocations();
-//		Set<Integer> yValue = new HashSet<Integer>();
-//		for ( int i = 0; i < p.length; i++) {
-//			yValue.add((int)p[i].getY());
-//		}
-//		return yValue.size();
-//	}
-//	
-//	public int getShapeGreatestY() {
-//		Point[] p = piece.getLocations();
-//		TreeSet<Integer> yValue = new TreeSet<Integer>();
-//		for ( int i = 0; i < p.length; i++) {
-//			yValue.add((int)p[i].getY());
-//		}
-//		return yValue.pollLast();
-//	}
-//	
-//	public int getShapeLowestX() {
-//		Point[] p = piece.getLocations();
-//		TreeSet<Integer> xValue = new TreeSet<Integer>();
-//		for ( int i = 0; i < p.length; i++) {
-//			xValue.add((int)p[i].getX());
-//		}
-//		return xValue.pollFirst();
-//	}
 
 
 	/**
@@ -230,7 +126,10 @@ public class Game {
 			// CREATE A NEW PIECE HERE
 			int rand = 0;
 			while (rand == 0) {
-				rand = (int)(dice.nextInt(23)/3.14159);
+				rand = (int)(dice.nextInt(24)/3.14159);
+				// Tracking the count of random numbers generated
+				shapeGenOutput[rand]++;
+				//System.out.println(rand);  // print out each number generated
 			}
 			switch(rand) {
 				case 1: {
@@ -250,7 +149,7 @@ public class Game {
 					break;
 				}
 				case 5: {
-					piece = new BarShape(Grid.WIDTH / 2 - 1, 1, grid);
+					piece = new ZShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
 				case 6: {
@@ -258,7 +157,7 @@ public class Game {
 					break;
 				}
 				case 7: {
-					piece = new ZShape(Grid.WIDTH / 2 - 1, 1, grid);
+					piece = new BarShape(Grid.WIDTH / 2 - 1, 1, grid);
 					break;
 				}
 			}

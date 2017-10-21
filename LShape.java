@@ -11,7 +11,7 @@ import java.awt.Point;
  * Sq <br>
  * Sq Sq <br>
  * 
- * The game piece "floats above" the Grid. The (row, col) coordinates are the
+ * The game piece "floats above" the Grid. The (col, row) coordinates are the
  * location of the middle Square on the side within the Grid
  * 
  * @author CSC 143

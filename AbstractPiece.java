@@ -13,7 +13,7 @@ public abstract class AbstractPiece implements Piece{
 	//private static int lengthX = 0;
 	//private static int lengthY = 0;
 	
-	private static Point[] points;
+	//private static Point[] points;
 	
 	protected boolean ableToMove;
 	
@@ -26,13 +26,7 @@ public abstract class AbstractPiece implements Piece{
 	protected Grid grid; // the board this piece is on // DISABLED TO SEE IF PERFROMACE WOULD IMPROVE
 	
 	/**
-	 * Creates an L-Shape piece. See class description for actual location of r
-	 * and c
 	 * 
-	 * @param r
-	 *            row location for this piece
-	 * @param c
-	 *            column location for this piece
 	 * @param g
 	 *            the grid for this game piece
 	 * 
@@ -53,10 +47,6 @@ public abstract class AbstractPiece implements Piece{
 		}
 	}
 	
-//	public Square[] getSquare(Piece piece) {
-//		return piece.getSquares();
-//	}
-	
 	/**
 	 * Moves the piece if possible Freeze the piece if it cannot move down
 	 * anymore
@@ -76,9 +66,9 @@ public abstract class AbstractPiece implements Piece{
 	}
 	
 	/**
-	 * Returns the (row,col) grid coordinates occupied by this Piece
+	 * Returns the (col, row) grid coordinates occupied by this Piece
 	 * 
-	 * @return an Array of (row,col) Points
+	 * @return an Array of (col, row) Points
 	 */
 	public Point[] getLocations() {
 		Point[] points = new Point[PIECE_COUNT];
@@ -92,15 +82,12 @@ public abstract class AbstractPiece implements Piece{
 	 * Accepts a Point[] array and sets columns and rows the Square objects in square[] array
 	 * @param points
 	 */
-	public void setLocations(Point[] points) {
-		//points = new Point[PIECE_COUNT];
-		for (int i = 0; i < PIECE_COUNT; i++) {
-			square[i].setCol((int)points[i].getX());
-			square[i].setRow((int)points[i].getY());
-			//points[i] = new Point(square[i].getCol(), square[i].getRow());
-		}
-		//return points;
-	}
+//	private void setLocations(Point[] points) {
+//		for (int i = 0; i < PIECE_COUNT; i++) {
+//			square[i].setCol((int)points[i].getX());
+//			square[i].setRow((int)points[i].getY());
+//		}
+//	}
 	
 	/**
 	 * Return the color of this piece
@@ -128,50 +115,62 @@ public abstract class AbstractPiece implements Piece{
 	}
 	
 	/**
-	 * Drops the shape to the lowest row the shape can fit on top of.
-	 */
-	public void dropPiece() {
-		this.setLocations(calcDropPiece(this.getLocations(), grid));
-	}
-	
-	/**
 	 * Calculates the rotation coordinates
 	 * @param p
 	 * @return
 	 */
 	public void rotate() {
 		
-//		points = p;
 		x = square[1].getCol();
 		y = square[1].getRow();
 		
+		boolean isBarShape = false;
+		int barrierDistanceLeft = 1;
+		int barrierDistanceRight = 1;
 		int row = 0;
 		int col = 0;
+		int barY = 0;
+		int barX = 0;
 		
-		if ( x - 1 >= 0 && x + 1 <= 9 ) {
-			
+		if (this.getXperimeter() == 4 || this.getYperimeter() == 4) {
+			isBarShape = true;
+			if (this.getYperimeter() == 4) {
+				barY = y - square[3].getRow();
+				if ( barY == 2) {
+					barrierDistanceRight = 2;
+				} else {
+					barrierDistanceLeft = 2;
+				}
+			} else {
+				barX = x - square[3].getCol();
+				if (barX == 2) {
+					barrierDistanceLeft = 2;
+				} else {
+					barrierDistanceRight = 2;
+				}
+			}
+		}
+		if ( x - barrierDistanceLeft >= 0 && x + barrierDistanceRight <= Grid.WIDTH - 1 ) {
 			for ( Square coord : square) {
 				
-				row = (int) coord.getRow() - y;
-				col = (int) coord.getCol() - x;
+				row = coord.getRow() - y;
+				col = coord.getCol() - x;
 				
 				if (col == 0 && row == -1) {
 					coord.setCol(coord.getCol() + 1);
 					coord.setRow(coord.getRow() + 1);
 				} else if (col == 1 && row == -1) {
 					coord.setCol(coord.getCol() + 0);
-					coord.setRow(coord.getRow() +  2);
+					coord.setRow(coord.getRow() + 2);
 				} else if (col == 1 && row == 0) {
 					coord.setCol(coord.getCol() - 1);
-					coord.setRow(coord.getRow() +  1);
+					coord.setRow(coord.getRow() + 1);
 				} else if (col == 1 && row == 1) {
-					//if ( x - 2 >= 0) {
-						coord.setCol(coord.getCol() - 2);
-						coord.setRow(coord.getRow() +  0);
-					//}
+					coord.setCol(coord.getCol() - 2);
+					coord.setRow(coord.getRow() + 0);
 				} else if (col == 0 && row == 1) {
 					coord.setCol(coord.getCol() - 1);
-					coord.setRow(coord.getRow() -  1);
+					coord.setRow(coord.getRow() - 1);
 				} else if (col == -1 && row == 1) {
 					coord.setCol(coord.getCol() + 0);
 					coord.setRow(coord.getRow() - 2);
@@ -179,35 +178,85 @@ public abstract class AbstractPiece implements Piece{
 					coord.setCol(coord.getCol() + 1);
 					coord.setRow(coord.getRow() - 1);
 				} else if (col == -1 && row == -1) {
-					//if (x + 2 <=9) {
+					coord.setCol(coord.getCol() + 2);
+					coord.setRow(coord.getRow() + 0);
+				}
+				
+				if (isBarShape) {
+					if (col == 0 && row == -2) {
 						coord.setCol(coord.getCol() + 2);
+						coord.setRow(coord.getRow() + 2);
+					} else if (col == 1 && row == -2) {
+						coord.setCol(coord.getCol() + 1);
+						coord.setRow(coord.getRow() + 3);
+					} else if (col == 2 && row == -2) {
+						coord.setCol(coord.getCol() + 0);
+						coord.setRow(coord.getRow() + 4);
+					} else if (col == 2 && row == -1) {
+						coord.setCol(coord.getCol() - 1);
+						coord.setRow(coord.getRow() + 3);
+					} else if (col == 2 && row == 0) {
+						coord.setCol(coord.getCol() - 2);
+						coord.setRow(coord.getRow() + 2);
+					} else if (col == 2 && row == 1) {
+						coord.setCol(coord.getCol() - 3);
+						coord.setRow(coord.getRow() - 1);
+					} else if (col == 2 && row == 2) {
+						coord.setCol(coord.getCol() - 4);
 						coord.setRow(coord.getRow() + 0);
-					//}
-					
+					} else if (col == 1 && row == 2) {
+						coord.setCol(coord.getCol() - 3);
+						coord.setRow(coord.getRow() - 1);
+					} else if (col == 0 && row == 2) {
+						coord.setCol(coord.getCol() - 2);
+						coord.setRow(coord.getRow() - 2);
+					} else if (col == -1 && row == 2) {
+						coord.setCol(coord.getCol() - 1);
+						coord.setRow(coord.getRow() - 3);
+					} else if (col == -2 && row == 2) {
+						coord.setCol(coord.getCol() + 0);
+						coord.setRow(coord.getRow() - 4);
+					} else if (col == -2 && row == 1) {
+						coord.setCol(coord.getCol() + 3);
+						coord.setRow(coord.getRow() - 3);
+					} else if (col == -2 && row == 0) {
+						coord.setCol(coord.getCol() + 2);
+						coord.setRow(coord.getRow() - 2);
+					} else if (col == -2 && row == -1) {
+						coord.setCol(coord.getCol() + 3);
+						coord.setRow(coord.getRow() - 1);
+					} else if (col == -2 && row == -2) {
+						coord.setCol(coord.getCol() + 4);
+						coord.setRow(coord.getRow() + 0);
+					} else if (col == -1 && row == -2) {
+						coord.setCol(coord.getCol() + 3);
+						coord.setRow(coord.getRow() + 1);
+					}
 				}
 			}
 		}
 	}
 	
-	
-	public Point[] calcDropPiece(Point[] p, Grid grid) {
+	/**
+	 * Drops the shape to the lowest row the shape can fit on top of.
+	 */
+	public void dropPiece() {
 		
-		//Grid grid = g;
 		int rowAbove = 0; 
 		int travelDist = 0;
-		//ArrayList<Integer> memYvalue = new ArrayList<Integer>();
+		
 		TreeSet<Integer> lowestYvalues = new TreeSet<Integer>();
 		
 		// measuring the distance from the shape to the lowest row
-		for ( Point coord : p) {
-			for ( int row = (int)coord.getY(); row < Grid.HEIGHT; row++ ) {
-				if(grid.isSet(row, (int) coord.getX())) {
+		for ( Square coord : square) {
+			for ( int row = coord.getRow(); row < Grid.HEIGHT; row++ ) {
+				if(grid.isSet(row, coord.getCol())) {
 					rowAbove = row - 1;
-					lowestYvalues.add( rowAbove - (int)coord.getY());
+					lowestYvalues.add( rowAbove - coord.getRow());
 					break;
 				} else if(row == Grid.HEIGHT - 1) {
 					rowAbove = Grid.HEIGHT - 1;
-					lowestYvalues.add( rowAbove - (int)coord.getY());
+					lowestYvalues.add( rowAbove - coord.getRow());
 					break;
 				}
 			}	
@@ -217,12 +266,9 @@ public abstract class AbstractPiece implements Piece{
 		travelDist = lowestYvalues.pollFirst();
 		
 		// setting the new shape coordinates
-		for ( Point coord : p) {
-			coord.setLocation((int)coord.getX(), 
-					travelDist + (int)coord.getY());
+		for ( Square coord : square) {
+			coord.setRow(coord.getRow() + travelDist);
 		}
-		// returning the new location
-		return p;
 	}
 	
 	/**
@@ -233,8 +279,8 @@ public abstract class AbstractPiece implements Piece{
 	private int getXperimeter() {
 		//Point[] p = piece.getLocations();
 		Set<Integer> xValue = new HashSet<Integer>();
-		for ( int i = 0; i < points.length; i++) {
-			xValue.add((int)points[i].getX());
+		for ( int i = 0; i < square.length; i++) {
+			xValue.add(square[i].getCol());
 		}
 		return xValue.size();
 	}
@@ -247,27 +293,9 @@ public abstract class AbstractPiece implements Piece{
 	private int getYperimeter() {
 		//Point[] p = piece.getLocations();
 		Set<Integer> yValue = new HashSet<Integer>();
-		for ( int i = 0; i < points.length; i++) {
-			yValue.add((int)points[i].getY());
+		for ( int i = 0; i < square.length; i++) {
+			yValue.add(square[i].getRow());
 		}
 		return yValue.size();
 	}
-	
-	private int getShapeGreatestY() {
-		//Point[] p = piece.getLocations();
-		TreeSet<Integer> yValue = new TreeSet<Integer>();
-		for ( int i = 0; i < points.length; i++) {
-			yValue.add((int)points[i].getY());
-		}
-		return yValue.pollLast();
-	}
-	
-	private int getShapeLowestX() {
-		//Point[] p = piece.getLocations();
-		TreeSet<Integer> xValue = new TreeSet<Integer>();
-		for ( int i = 0; i < points.length; i++) {
-			xValue.add((int)points[i].getX());
-		}
-		return xValue.pollFirst();
-	}	
 }

@@ -4,8 +4,6 @@ import java.awt.Point;
 
 public interface Piece {
 	
-	//abstract void rotate();
-	
 	abstract void draw(Graphics g);
 	
 	abstract void move(Direction direction);

@@ -86,7 +86,7 @@ public class Square {
 	 * @param direction
 	 *            the direction to test for possible move
 	 */
-	public boolean canMove(Direction direction) {
+	protected boolean canMove(Direction direction) {
 		if (!ableToMove)
 			return false;
 
@@ -124,7 +124,7 @@ public class Square {
 	 * @param direction
 	 *            the direction to move
 	 */
-	public void move(Direction direction) {
+	protected void move(Direction direction) {
 		if (canMove(direction)) {
 			switch (direction) {
 			case DOWN:
@@ -146,21 +146,21 @@ public class Square {
 	 * @param c
 	 *            the new color
 	 */
-	public void setColor(Color c) {
+	protected void setColor(Color c) {
 		color = c;
 	}
 
 	/**
 	 * Gets the color of this square
 	 */
-	public Color getColor() {
+	protected Color getColor() {
 		return color;
 	}
 
 	/**
 	 * Draws this square on the given graphics context
 	 */
-	public void draw(Graphics g) {
+	protected void draw(Graphics g) {
 
 		// calculate the upper left (x,y) coordinate of this square
 		int actualX = Grid.LEFT + col * WIDTH;
