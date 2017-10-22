@@ -26,7 +26,7 @@ public class Game {
 	private Random dice = new Random();
 	
 	// Tracking the random numbers that generate shapes
-	public static int[] shapeGenOutput = new int[8];
+	//public static int[] shapeGenOutput = new int[8];
 
 	/**
 	 * Creates a Tetris game
@@ -127,8 +127,9 @@ public class Game {
 			int rand = 0;
 			while (rand == 0) {
 				rand = (int)(dice.nextInt(24)/3.14159);
+				
 				// Tracking the count of random numbers generated
-				shapeGenOutput[rand]++;
+				//shapeGenOutput[rand]++;
 				//System.out.println(rand);  // print out each number generated
 			}
 			switch(rand) {

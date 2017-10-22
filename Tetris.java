@@ -69,15 +69,17 @@ public class Tetris extends JPanel {
 			g.setFont(new Font("Palatino", Font.BOLD, 40));
 			g.setColor(Color.BLACK);
 			g.drawString("GAME OVER", 80, 300);
-			double numOfShapes = 0;
-			for ( int i = 0; i < Game.shapeGenOutput.length; i++) {
-				numOfShapes += Game.shapeGenOutput[i];
-			}
 			
-			// Prints output of percentage of random number generating representing the percentage of different shapes generated
-			for ( int i = 0; i < Game.shapeGenOutput.length; i++) {
-				System.out.printf(i + " was generated %.2f%% during the game\n", (Game.shapeGenOutput[i]/numOfShapes * 100));
-			}
+//			// Calculates the percentage of times a type of shape was chosen
+//			double numOfShapes = 0;
+//			for ( int i = 0; i < Game.shapeGenOutput.length; i++) {
+//				numOfShapes += Game.shapeGenOutput[i];
+//			}
+//			
+//			// Prints output of percentage of random number generating representing the percentage of different shapes generated
+//			for ( int i = 0; i < Game.shapeGenOutput.length; i++) {
+//				System.out.printf(i + " was generated %.2f%% during the game\n", (Game.shapeGenOutput[i]/numOfShapes * 100));
+//			}
 		}
 	}
 

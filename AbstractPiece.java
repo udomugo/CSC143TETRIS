@@ -10,13 +10,8 @@ public abstract class AbstractPiece implements Piece{
 	
 	private static int x = 0;
 	private static int y = 0;
-	//private static int lengthX = 0;
-	//private static int lengthY = 0;
-	
-	//private static Point[] points;
 	
 	protected boolean ableToMove;
-	
 	protected Square[] square;
 	
 	// number of squares in one Tetris game piece
@@ -77,17 +72,6 @@ public abstract class AbstractPiece implements Piece{
 		}
 		return points;
 	}
-	
-	/**
-	 * Accepts a Point[] array and sets columns and rows the Square objects in square[] array
-	 * @param points
-	 */
-//	private void setLocations(Point[] points) {
-//		for (int i = 0; i < PIECE_COUNT; i++) {
-//			square[i].setCol((int)points[i].getX());
-//			square[i].setRow((int)points[i].getY());
-//		}
-//	}
 	
 	/**
 	 * Return the color of this piece
